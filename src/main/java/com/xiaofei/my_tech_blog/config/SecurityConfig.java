@@ -16,8 +16,15 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // 暂时禁用CSRF保护，便于测试
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/users/register", "/api/users/login").permitAll() // 允许公开访问注册和登录
-                        .anyRequest().authenticated() // 其他请求需要认证
+                        .requestMatchers(
+                                "/api/users/register",
+                                "/api/users/login",
+                                "/api/articles/published",  // 允许公开访问已发布文章
+                                "/api/articles/{id}"        // 允许公开访问单篇文章
+                        ).permitAll()
+                        .anyRequest().authenticated()
                 );
+
 
         return http.build();
     }
