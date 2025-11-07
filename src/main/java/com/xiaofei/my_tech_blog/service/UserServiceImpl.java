@@ -11,10 +11,10 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Autowired // 自动注入UserRepository
     private UserRepository userRepository;
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 创建密码编码器
 
     @Override
     public User registerUser(String username, String email, String password) {
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUsernameAvailable(String username) {
+    public boolean isUsernameAvailable(String username) { // 检查用户名是否可用
         return !userRepository.existsByUsername(username);
     }
 

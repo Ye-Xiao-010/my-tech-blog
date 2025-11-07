@@ -23,8 +23,8 @@ public class Article {
     @Enumerated(EnumType.STRING)
     private ArticleStatus status = ArticleStatus.DRAFT; // 文章状态
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY) // 多篇文章关联一个作者
+    @JoinColumn(name = "user_id", nullable = false) // 外键关联
     private User author;
 
     @Column(name = "created_at")
